@@ -1,4 +1,7 @@
 package br.com.fitai.core.repository;
 
-public class ObjetivoAvancadoRepository {
+import br.com.fitai.core.model.ObjetivoAvancado;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ObjetivoAvancadoRepository extends JpaRepository<ObjetivoAvancado, Long> {
 }
