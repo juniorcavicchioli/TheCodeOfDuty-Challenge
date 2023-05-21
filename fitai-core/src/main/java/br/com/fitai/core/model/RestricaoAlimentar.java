@@ -1,11 +1,18 @@
 package br.com.fitai.core.model;
 
+import br.com.fitai.core.controller.RestricaoAlimentarController;
+import br.com.fitai.core.controller.UsuarioController;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.EntityModel;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Data
 @NoArgsConstructor
@@ -30,4 +37,13 @@ public class RestricaoAlimentar {
     @NotNull(message = "O id da lista é obrigatório")
     @JoinColumn(name = "id_lista_restricao", nullable = false)
     private ListaRestricoes listaRestricoes;
+
+    public EntityModel<RestricaoAlimentar> toEntityModel() {
+        return EntityModel.of(
+                this,
+                linkTo(methodOn(RestricaoAlimentarController.class).show(id)).withSelfRel(),
+                linkTo(methodOn(RestricaoAlimentarController.class).destroy(id)).withRel("delete"),
+                linkTo(methodOn(RestricaoAlimentarController.class).index(Pageable.unpaged())).withRel("all")
+        );
+    }
 }

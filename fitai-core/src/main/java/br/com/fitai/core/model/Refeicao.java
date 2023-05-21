@@ -1,11 +1,18 @@
 package br.com.fitai.core.model;
 
+import br.com.fitai.core.controller.RefeicaoController;
+import br.com.fitai.core.controller.UsuarioController;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.EntityModel;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Data
 @NoArgsConstructor
@@ -34,4 +41,13 @@ public class Refeicao {
     private CategoriaRefeicao categoriaRefeicao; // relação
 
     private Integer peso;
+
+    public EntityModel<Refeicao> toEntityModel() {
+        return EntityModel.of(
+                this,
+                linkTo(methodOn(RefeicaoController.class).show(id)).withSelfRel(),
+                linkTo(methodOn(RefeicaoController.class).destroy(id)).withRel("delete"),
+                linkTo(methodOn(RefeicaoController.class).index(Pageable.unpaged())).withRel("all")
+        );
+    }
 }
