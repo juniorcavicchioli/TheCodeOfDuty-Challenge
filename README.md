@@ -1,6 +1,56 @@
-# Challenge
+# Fit AI
 
-DESCRIÇÃO
+Projeto destinado à faculdade, é um aplicativo com um chatbot que usará de inteligencia artificial para auxiliar o usuário com sua alimentação e controle de sua saúde.
+
+
+# Sobre o projeto
+
+A alimentação saudável é fundamental para a saúde e o bem-estar, no entanto, muitas pessoas têm dificuldades para entender o que é uma dieta equilibrada e quais alimentos são mais adequados para o seu corpo. Além disso, a prática regular de atividades físicas é essencial para manter uma vida saudável. Para ajudar a solucionar essas questões, uma IA pode ser desenvolvida com o objetivo de auxiliar pessoas leigas a saberem como se alimentar melhor e compartilhar exercícios físicos que elas possam fazer.
+
+A utilização da API do ChatGPT para fornecer informações nutricionais personalizadas através de um aplicativo mobile é uma tendência crescente, já que as pessoas estão cada vez mais interessadas em cuidar da sua saúde e bem-estar. Uma das principais vantagens da utilização da API do ChatGPT em um aplicativo mobile de nutrição é a capacidade de fornecer respostas personalizadas e precisas para as perguntas dos usuários em tempo real.
+
+Isso significa que, em vez de pesquisar na internet por horas em busca de informações confiáveis sobre nutrição, os usuários podem ter suas dúvidas esclarecidas rapidamente, sem precisar sair do aplicativo.
+
+## Estrutura do aplicativo
+
+O sistema irá girar em torno do usuário. Ele pode ter um e-mail, uma senha, nome, sexo, data de nascimento e altura.
+
+Atrelado a ele estarão suas restrições alimentares, que compõem o grau e a restrição.
+
+Também atrelado a ele também estarão suas atividades físicas, com uma descrição do exercício feito composto por categoria, nome, duração e uma descrição opcional. Para usuários avançados, poderá ter a intensidade, a quantidade de series e de repetições.
+
+Ainda atrelado ao usuário deverá haver seu registro alimentar. Composto por hora que ele comeu, o alimento, qual a categoria da refeição (por exemplo: se foi almoço ou jantar) e o peso.
+
+O usuário também terá um registro de saúde. Nele estarão informações como o dia e o peso que ele está. Para usuários avançados, poderão registrar sua massa muscular, circunferência da cintura e do quadril, massa óssea, hidratação, calorias diárias, frequência cardíaca em repouso, pressão arterial, glicose, gordura corporal e metabolismo basal.
+
+O usuário também poderá ter um objetivo atrelado a ele composto pelos mesmos campos do registro de saúde.
+
+## Regras de negócio
+
+Algumas regras já definidas mas que não se limitam a somente essas e também podem ser alteradas a qualquer momento são:
+
+RN01 - Todas as categorias devem ser referenciadas por uma tabela auxiliar onde estarão cadastradas as já existentes sem inserção de dados pelo usuário. Por exemplo: categorias de exercícios devem estar todas inseridas nessa tabela, como cardiovascular etc.
+
+RN02 – Totas os campos avançados devem ser referenciados como uma tabela extra opcional para evitar acúmulo de campos nulos.
+
+RN03 – O sexo do usuário deve ser descrito por M – masculino, F- feminino e N – não informado.
+
+RN04 – O nível de restrição deve ser limitado à 0 para restrição voluntária, 1 para restrição parcial e 2 para restrição total.
+
+RN05 – O histórico de conversas do usuário com o ChatBot deve ser armazenado numa tabela atrelada a ele.
+
+## Diagramas
+
+O modelo lógico e relacional foram desenvolvidos para expressar a maneira como o banco será. Mantemos a liberdade de possíveis alterações conforme necessidade.
+
+Modelo lógico:
+![Modelo lógico](./diagramas_e_modelos/modelo_logico.jpg)
+
+Modelo físico/relacional:
+![Modelo Físico/Relacional](./diagramas_e_modelos/modelo_relacional.jpg)
+
+Diagrama da solução completa:
+![Diagrama da solução completa](./diagramas_e_modelos/arquitetura_de_solução.png)
 
 # Endpoints
 
@@ -51,21 +101,21 @@ DESCRIÇÃO
 <details>
     <summary>Clique aqui para ver os detlahes de como o objetivo deve ser preenchido</summary>
 
-| Campo | Tipo | Obrigatório | Descrição |
-|-|-|:-:|-|
-| dia | data | sim | dia desse registro |
-| peso | flutuante | sim | peso do titular
-| massaMuscular | flutuante | nao | ---
-| circunCintura | flutuante | nao | circunferencia da cintura
-| circunQuadril | flutuante | nao | circunferencia do quadril
-| massaOssea | flutuante | nao | ---
-| hidratacao | flutuante | nao | ---
-| calDiaria | inteiro | nao | calorias diárias
-| freqCardiacaRepouso | inteiro | nao | frequencia cardíaca em repouso
-| pressaoArterial | texto | nao | ---
-| glicose | inteiro | nao | ---
-| gorduraCorporal | flutuante | nao | ---
-| metabolismoBasal | inteiro | nao | ---
+| Campo               | Tipo      | Obrigatório | Descrição                      |
+|---------------------|-----------|:-----------:|--------------------------------|
+| dia                 | data      |     sim     | dia desse registro             |
+| peso                | flutuante |     sim     | peso do titular                |
+| massaMuscular       | flutuante |     nao     | ---                            |
+| circunCintura       | flutuante |     nao     | circunferencia da cintura      |
+| circunQuadril       | flutuante |     nao     | circunferencia do quadril      |
+| massaOssea          | flutuante |     nao     | ---                            |
+| hidratacao          | flutuante |     nao     | ---                            |
+| calDiaria           | inteiro   |     nao     | calorias diárias               |
+| freqCardiacaRepouso | inteiro   |     nao     | frequencia cardíaca em repouso |
+| pressaoArterial     | texto     |     nao     | ---                            |
+| glicose             | inteiro   |     nao     | ---                            |
+| gorduraCorporal     | flutuante |     nao     | ---                            |
+| metabolismoBasal    | inteiro   |     nao     | ---                            |
 
 *Exemplo de requisição com o objetivo*
 ```json
@@ -186,7 +236,7 @@ DESCRIÇÃO
     "altura": 1.85,
     "restricao":null,
     "objetivo":null
-}
+},
 {
     "email": "outroexemplo@exemplo.com",
     "senha": "87654321",
